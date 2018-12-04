@@ -1,5 +1,5 @@
 const { readFileSync } = require("fs");
-const inpArr = readFileSync("input.txt").toString().split('\n');
+const inpArr = readFileSync("input.txt").toString().split("\n");
 
 for (let i = 0; i < inpArr.length; i++) {
     for (let j = inpArr.length - 1; j >= 0; j--) {

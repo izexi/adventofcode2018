@@ -1,5 +1,5 @@
 const { readFileSync } = require("fs");
-const inpArr = readFileSync("input.txt").toString().split('\n');
+const inpArr = readFileSync("input.txt").toString().split("\n");
 const totals = new Set();
 let total = 0;
 let i = 0;

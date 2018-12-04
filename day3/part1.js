@@ -1,5 +1,5 @@
 const { readFileSync } = require("fs");
-const inpArr = readFileSync("input.txt").toString().split('\n');
+const inpArr = readFileSync("input.txt").toString().split("\n");
 const claimed = new Map();
 let overlap = 0;
 

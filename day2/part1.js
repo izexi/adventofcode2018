@@ -1,5 +1,5 @@
 const { readFileSync } = require("fs");
-const inpArr = readFileSync("input.txt").toString().split('\n');
+const inpArr = readFileSync("input.txt").toString().split("\n");
 let twice = 0;
 let thrice = 0;
 
