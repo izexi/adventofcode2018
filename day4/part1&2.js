@@ -6,24 +6,25 @@ let sleepStart, currentGuard;
 
 inpArr.forEach(record => {
 	if (record.includes("#")) {
-        currentGuard = parseInt(record.match(/#(\d+)/)[1]);
-        if (!guardSleep.has(currentGuard)) guardSleep.set(currentGuard, { totalMin : 0, 
-                minFreq: Array(60).fill(0) });
-    }
-    const currentMinute = parseInt(record.match(/:(\d+)\]/)[1]);
+		currentGuard = parseInt(record.match(/#(\d+)/)[1]);
+		if (!guardSleep.has(currentGuard)) {
+			guardSleep.set(currentGuard, { totalMin : 0, minFreq: Array(60).fill(0) });
+		}
+	}
+	const currentMinute = parseInt(record.match(/:(\d+)\]/)[1]);
 	if (record.includes("asleep")) sleepStart = currentMinute;
 	if (record.includes("wakes")) {
-        guardSleep.set(currentGuard, {
-            totalMin: (guardSleep.get(currentGuard)).totalMin += currentMinute - sleepStart,
-            minFreq: (guardSleep.get(currentGuard)).minFreq
-        });
-        for (let i = sleepStart; i < currentMinute; i++) {
-            guardSleep.set(currentGuard, {
-                totalMin: (guardSleep.get(currentGuard)).totalMin,
-                minFreq: ((guardSleep.get(currentGuard)).minFreq[i]++, (guardSleep.get(currentGuard)).minFreq)
-            });
-        }    	
-    }
+		guardSleep.set(currentGuard, {
+			totalMin: (guardSleep.get(currentGuard)).totalMin += currentMinute - sleepStart,
+			minFreq: (guardSleep.get(currentGuard)).minFreq,
+		});
+		for (let i = sleepStart; i < currentMinute; i++) {
+			guardSleep.set(currentGuard, {
+				totalMin: (guardSleep.get(currentGuard)).totalMin,
+				minFreq: ((guardSleep.get(currentGuard)).minFreq[i]++, (guardSleep.get(currentGuard)).minFreq),
+			});
+		}
+	}
 });
 
 const mostAsleep = [...guardSleep].reduce((a, b) => (a[1].totalMin > b[1].totalMin) ? a : b);
