@@ -22,17 +22,14 @@ for (let x = 0; x < maxCoord[0] + 1; x++) {
 			const found = input.findIndex(e => e[0] === closestPoint[0] && e[1] === closestPoint[1]);
 			if (found !== -1) point = found;
 		}
-		if (infintePoint([x, y]) || point === -1 && !inifintePoints.has(point)) inifintePoints.add(point);
+		if (infintePoint([x, y]) || point === -1 && !inifintePoints.has(point)) {
+			areas.delete(point);
+			inifintePoints.add(point);
+		}
+		if (!inifintePoints.has(point)) areas.set(point, (areas.get(point) || 0) + 1);
 		grid[y][x] = point;
 	}
 }
-
-// for some reason calculating the area within the nested for loop doesn't return the right answer
-grid.forEach(row => {
-	row.forEach(point => {
-		if (!inifintePoints.has(point)) areas.set(point, (areas.get(point) || 0) + 1);
-	});
-});
 
 console.log(`Day 6 | Part 1 - Solution: ${[...areas.values()].reduce((a, b) => a > b ? a : b)}`);
 console.log(`Day 6 | Part 2 - Solution: ${safeRegion}`);
@@ -45,3 +42,4 @@ console.log(`Day 6 | Part 2 - Solution: ${safeRegion}`);
 console.log(`\nPoints:\n ${grid.map(e => e.join(" ")).join("\n")}`);
 console.log(inifintePoints);
 console.log(areas); */
+
